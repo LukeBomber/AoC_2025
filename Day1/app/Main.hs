@@ -1,6 +1,7 @@
-import Day1 
+import Day2 
 
 main :: IO ()
 main = do
-    input <- readFile "input.txt"
+    input <- readFile "test2.txt"
+    --print (fst $ solve input)
     print (solve input)

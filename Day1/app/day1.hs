@@ -36,8 +36,8 @@ rotate2 rots bookKeep current acc =
     case rots of 
         [] -> (newAcc, reverse bookKeep)
         ((Rotation 'L' n):xs) ->
-            let cnt = (div (current-n) 100) 
-            in rotate2 xs ((-cnt):bookKeep) (mod (current-n) 100) (newAcc-cnt)
+            let cnt = abs((div (current-n) 100)) - fromEnum (current==0) + fromEnum ((mod (current-n) 100)==0)
+            in rotate2 xs ((-cnt):bookKeep) (mod (current-n) 100) (newAcc+cnt)
         ((Rotation 'R' n):xs) -> 
             let cnt = div (current+n) 100 
             in rotate2 xs (cnt:bookKeep) (mod (current+n) 100) (newAcc+cnt)
