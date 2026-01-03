@@ -1,7 +1,8 @@
 --import Day1
 --import Day2 
 --import Day7
-import Day3
+--import Day3
+import Day4
 
 printTable :: Show a => [a] -> IO ()
 printTable [] = print()
@@ -12,8 +13,8 @@ main :: IO ()
 main = do
     let test = False
 
-    let path = (if test then "test" else "input") ++ "3.txt"
+    let path = (if test then "test" else "input") ++ "4.txt"
     input <- fmap lines (readFile path)
     let res = solve input
     print $ fst $ res
-    print $ snd $ res
+    printTable $ snd $ res
