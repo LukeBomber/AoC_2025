@@ -1,0 +1,113 @@
+        #if (len(victims) == 1):
+        #    return [victims[0]]
+        # + helper([victims[0]] + victims[2:], width)
+            #while(len(set(lst)) != 1):
+    #    lst = helper(lst,width)
+
+        '''
+    def inner2 (victims, tail):
+        #print("victims: ", victims)
+        if len(victims) == 1:
+            tail.append(victims[0])
+            return list(reversed(tail))
+            #return victims
+        elif victims[0] >= myMax(victims[1:]):
+
+            return list(reversed(tail)) + ([victims[0]]*len(victims))
+        elif victims[0] >= victims[1]:
+            tail.append(victims[0])
+
+            return inner2(victims[1:], tail)
+        else:
+            tail.append(victims[0]+1)
+
+            return inner2([victims[0]+1] + victims[2:],tail)
+    
+    old = makeCopy(lst)
+    lst = inner2(lst,[])
+    
+    while(not lst == old):
+        old = makeCopy(lst)
+        lst = inner2(lst,[])
+    '''
+    #print(lst, res)
+
+    
+    '''
+    def inner (victims):
+
+        while(not allEquals(victims)):
+            where = argmax(victims)
+            if where == 0:
+                return [victims[where]]*len(victims)
+            victims[where-1]+=1
+            victims[where] = min(victims[where-1],victims[where])
+        #print(victims)
+        return victims
+    
+    lst = inner(lst)
+    '''
+
+def chopUp(item, width):
+    item_str = str(item)
+    assert(len(item_str) % width == 0)
+    res = []
+    for i in range(0,digits(item),width):
+        res.append(int(item_str[i:i+width]))
+    return res 
+
+    #print(chopUp(237102,2))
+def myMax(input):
+
+    return -1 if input == [] else max(input)
+
+    
+def argmax(lst):
+    def inner(lst, max, argmax,curr):
+        if lst == []:
+            return argmax
+        if lst[0] > max:
+            return inner(lst[1:],lst[0],curr, curr+1)
+        return inner(lst[1:], max, argmax,curr+1)
+    return inner(lst,lst[0],0,0)
+
+def makeCopy(list):
+    res = []
+    for elem in list:
+        res.append(elem)
+    return res
+def allEquals(lst):
+    for i in range (len(lst)-1):
+        if not(lst[i]==lst[i+1]):
+            return False
+    return True
+
+    '''
+    lst = chopUp(item, width)
+    def inner (victims):
+        if len(victims) == 1:
+            return victims
+        elif victims[0] >= myMax(victims[1:]):
+            return [victims[0]]*len(victims)
+        elif victims[0] >= victims[1]:
+            return [victims[0]] + inner(victims[1:])
+        else:
+            return [victims[0]+1] + inner([victims[0]+1] + victims[2:])
+
+    old = makeCopy(lst)
+    lst = inner(lst)
+    
+    while(not lst == old):
+        old = makeCopy(lst)
+        lst = inner(lst)
+    
+    return int(reduce(lambda acc, elem: acc + str(elem), lst, ""))
+    '''
+    '''
+def findStart(item, width):
+    victims = chopUp(item, width)
+    lst = ([victims[0]]*len(victims) 
+        if victims[0] >= myMax(victims[1:]) 
+        else [(victims[0]+1)]*len(victims)) 
+    return int(reduce(lambda acc, elem: acc + str(elem), lst, ""))
+   ''' 
